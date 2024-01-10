@@ -32,6 +32,7 @@ pub struct TwoSwitches {
 }
 
 /// Now there are two switches so we need a proper type for the transition.
+#[derive(PartialEq)]
 pub enum Toggle {
 	FirstSwitch,
 	SecondSwitch,
@@ -43,7 +44,35 @@ impl StateMachine for WeirdSwitchMachine {
 	type Transition = Toggle;
 
 	fn next_state(starting_state: &TwoSwitches, t: &Toggle) -> TwoSwitches {
-		todo!("Exercise 2")
+
+		let state_of_first_button: bool = starting_state.first_switch;
+		let state_of_second_button: bool = starting_state.second_switch;
+
+		let toggle_first_switch = *t == Toggle::FirstSwitch;
+		let toggle_second_switch = *t == Toggle::SecondSwitch;
+
+		let mut first_switch_state_after_toggle :bool = false;
+		let mut second_switch_state_after_toggle:bool = false;
+		
+		if (toggle_first_switch)
+		{
+			if (state_of_first_button) {
+				first_switch_state_after_toggle = !starting_state.first_switch;
+				if(starting_state.second_switch ){
+					second_switch_state_after_toggle = !starting_state.second_switch;
+				}
+
+			}
+			else{
+				first_switch_state_after_toggle = !starting_state.first_switch;
+			}
+		}else if  (toggle_second_switch)
+		{
+			first_switch_state_after_toggle = starting_state.first_switch;
+			second_switch_state_after_toggle = !starting_state.second_switch;
+		}
+		let x = TwoSwitches { first_switch: first_switch_state_after_toggle, second_switch: second_switch_state_after_toggle };
+		x
 	}
 }
 
