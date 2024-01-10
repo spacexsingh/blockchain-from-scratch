@@ -46,7 +46,7 @@ impl StateMachine for WeirdSwitchMachine {
 	fn next_state(starting_state: &TwoSwitches, t: &Toggle) -> TwoSwitches {
 
 		let state_of_first_button: bool = starting_state.first_switch;
-		let state_of_second_button: bool = starting_state.second_switch;
+		//let state_of_second_button: bool = starting_state.second_switch;
 
 		let toggle_first_switch = *t == Toggle::FirstSwitch;
 		let toggle_second_switch = *t == Toggle::SecondSwitch;
